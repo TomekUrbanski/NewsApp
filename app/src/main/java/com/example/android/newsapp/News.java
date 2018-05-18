@@ -6,11 +6,11 @@ public class News {
 
     private String mTitle;
     private String mInformation;
-    private long mDate;
+    private String mDate;
     private String mAuthor;
     private String mUrl;
 
-    public News(String title, String information, long date, String author,String url) {
+    public News(String title, String information, String date, String author,String url) {
         mTitle = title;
         mInformation = information;
         mDate = date;
@@ -26,7 +26,7 @@ public class News {
         return mInformation;
     }
 
-    public long getmDate() {
+    public String getDate() {
         return mDate;
     }
 

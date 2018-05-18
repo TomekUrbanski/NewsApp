@@ -15,20 +15,22 @@
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
+            style="@style/TitleText"
             />
         <TextView
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="end"
-            android:layout_gravity="center"
+            android:layout_gravity="top"
+            android:textColor="@android:color/black"
             />
     </LinearLayout>
 
     <TextView
         android:id="@+id/information"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"/>
 
 </LinearLayout>

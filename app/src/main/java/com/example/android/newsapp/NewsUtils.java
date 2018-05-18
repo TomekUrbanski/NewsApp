@@ -121,7 +121,7 @@ public class NewsUtils {
 
             JSONObject baseJsonResponse = new JSONObject(newsJSON);
 
-            JSONArray newsArray = baseJsonResponse.getJSONArray("article");
+            JSONArray newsArray = baseJsonResponse.getJSONArray("articles");
 
 
             for (int i = 0; i < newsArray.length(); i++) {
@@ -130,7 +130,7 @@ public class NewsUtils {
                 JSONObject currentNews = newsArray.getJSONObject(i);
                 String title = currentNews.getString("title");
                 String linformation = currentNews.getString("description");
-                long time = currentNews.getLong("publishedAt");
+                String time = currentNews.getString("publishedAt");
                 String author = currentNews.getString("author");
                 String url = currentNews.getString("url");
 

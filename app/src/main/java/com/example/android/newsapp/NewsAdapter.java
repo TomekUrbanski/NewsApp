@@ -18,6 +18,8 @@ public class NewsAdapter extends ArrayAdapter<News> {
         super(context, 0, news);
     }
 
+    private static final String LOCATION_SEPARATOR = "T";
+
     public View getView(int position, View convertView, ViewGroup parent) {
         // Check if there is an existing list item view (called convertView) that we can reuse,
         // otherwise, if convertView is null, then inflate a new list item layout.
@@ -33,21 +35,30 @@ public class NewsAdapter extends ArrayAdapter<News> {
         newsTitle.setText(currentNews.getmTitle());
 
         TextView newsDate = listItemView.findViewById(R.id.date);
-        Date dateObject = new Date(currentNews.getmDate());
-        String formattedDate = formatDate(dateObject);
-        newsDate.setText(formattedDate);
+        String originalDate = currentNews.getDate();
+
+        if (originalDate.contains(LOCATION_SEPARATOR)) {
+            String[] parts = originalDate.split(LOCATION_SEPARATOR);
+            newsDate.setText(parts[0]);
+
+        } else {
+            newsDate.setText(currentNews.getDate());
+        }
+
 
         StringBuilder infoAndAuthor = new StringBuilder();
-        infoAndAuthor.append(currentNews.getmInformation()).append(" /").append(currentNews.getmAuthor());
+        String author;
+        if(currentNews.getmAuthor()==null) {
+            author = "anonymous";
+        }else{
+            author = currentNews.getmAuthor();
+            }
+
+        infoAndAuthor.append(currentNews.getmInformation()).append(" /").append(author);
         String finalInformation = infoAndAuthor.toString();
         TextView newsInformation = listItemView.findViewById(R.id.information);
         newsInformation.setText(finalInformation);
 
         return listItemView;
-    }
-
-    private String formatDate(Date dateObject) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("LLL dd, yyyy");
-        return dateFormat.format(dateObject);
     }
 }
