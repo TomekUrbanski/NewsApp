@@ -5,7 +5,35 @@
     <string name="settings_menu_item">Settings</string>
     <string name="settings_title">News Settings</string>
 
-    <string name="settings_min_magnitude_label">Minimum Magnitude</string>
-    <string name="settings_min_magnitude_key" translatable="false">min_magnitude</string>
-    <string name="settings_min_magnitude_default" translatable="false">0</string>
+    <!-- Number of Articles -->
+    <string name="settings_num_of_articles_label">Number of articles</string>
+    <string name="settings_num_of_articles_key" translatable="false">num_of_articles</string>
+    <string name="settings_num_of_articles_default" translatable="false">10</string>
+
+    <!-- Field of Articles -->
+    <string name="settings_field_of_label">Field of</string>
+    <string name="settings_field_of_key" translatable="false">field_of</string>
+    <string name="settings_field_of_default" translatable="false">@string/settings_field_of_news_value</string>
+
+    <string name="settings_field_of_sport_label">Sport</string>
+    <string name="settings_field_of_sport_value" translatable="false">bbc-sport</string>
+
+    <string name="settings_field_of_news_label">News</string>
+    <string name="settings_field_of_news_value" translatable="false">bbs-news</string>
+
+    <!-- Language of Articles -->
+    <string name="settings_language_label">Language</string>
+    <string name="settings_language_key" translatable="false">language</string>
+    <string name="settings_language_default" translatable="false">@string/settings_language_en_value</string>
+
+    <string name="settings_language_en_label">English</string>
+    <string name="settings_language_en_value" translatable="false">en</string>
+
+    <string name="settings_language_de_label">German</string>
+    <string name="settings_language_de_value" translatable="false">de</string>
+
+    <string name="settings_language_fr_label">French</string>
+    <string name="settings_language_fr_value" translatable="false">fr</string>
+
 </resources>
+

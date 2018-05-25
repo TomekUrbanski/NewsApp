@@ -2,8 +2,6 @@ package com.example.android.newsapp;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 public class NewsAdapter extends ArrayAdapter<News> {
@@ -24,8 +20,7 @@ public class NewsAdapter extends ArrayAdapter<News> {
     private static final String LOCATION_SEPARATOR = "T";
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        // Check if there is an existing list item view (called convertView) that we can reuse,
-        // otherwise, if convertView is null, then inflate a new list item layout.
+
         View listItemView = convertView;
         if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(
@@ -34,9 +29,9 @@ public class NewsAdapter extends ArrayAdapter<News> {
 
         News currentNews = getItem(position);
         LinearLayout listItem = listItemView.findViewById(R.id.news_item);
-        if((position & 1) == 0) {
+        if ((position & 1) == 0) {
             listItem.setBackgroundColor(Color.parseColor("#FFFFFF"));
-        }else {
+        } else {
             listItem.setBackgroundColor(Color.parseColor("#E0E0E0"));
         }
 
@@ -57,11 +52,11 @@ public class NewsAdapter extends ArrayAdapter<News> {
 
         StringBuilder infoAndAuthor = new StringBuilder();
         String author;
-        if(currentNews.getmAuthor()==null) {
+        if (currentNews.getmAuthor() == null) {
             author = "anonymous";
-        }else{
+        } else {
             author = currentNews.getmAuthor();
-            }
+        }
 
         infoAndAuthor.append(currentNews.getmInformation()).append(" /").append(author);
         String finalInformation = infoAndAuthor.toString();

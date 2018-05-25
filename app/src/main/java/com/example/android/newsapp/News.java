@@ -1,7 +1,5 @@
 package com.example.android.newsapp;
 
-import java.net.URL;
-
 public class News {
 
     private String mTitle;
@@ -10,7 +8,7 @@ public class News {
     private String mAuthor;
     private String mUrl;
 
-    public News(String title, String information, String date, String author,String url) {
+    public News(String title, String information, String date, String author, String url) {
         mTitle = title;
         mInformation = information;
         mDate = date;

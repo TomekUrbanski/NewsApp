@@ -19,10 +19,12 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<News>> {
+public class MainActivity extends AppCompatActivity
+        implements LoaderManager.LoaderCallbacks<List<News>>, SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static final String USGS_REQUEST_URL =
-            "https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=6047e7081995422b936befa9fa616a4f";
+            "https://newsapi.org/v2/everything";
+    private static final String API_KEY = "6047e7081995422b936befa9fa616a4f";
 
     private static final int NEWS_LOADER_ID = 1;
     private NewsAdapter mAdapter;
@@ -41,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mAdapter = new NewsAdapter(this, new ArrayList<News>());
         newsListView.setAdapter(mAdapter);
 
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        prefs.registerOnSharedPreferenceChangeListener(this);
 
         newsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -59,29 +63,50 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     @Override
+    public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+        if (key.equals(getString(R.string.settings_num_of_articles_key)) ||
+                key.equals(getString(R.string.settings_field_of_key))) {
+
+            mAdapter.clear();
+            mEmptyStateTextView.setVisibility(View.GONE);
+
+            View loadingIndicator = findViewById(R.id.loading_indicator);
+            loadingIndicator.setVisibility(View.VISIBLE);
+
+            getLoaderManager().restartLoader(NEWS_LOADER_ID, null, this);
+        }
+    }
+
+    @Override
     public Loader<List<News>> onCreateLoader(int i, Bundle bundle) {
         Log.e("TEST", "Problem 1");
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-        // getString retrieves a String value from the preferences. The second parameter is the default value for this preference.
-        String minMagnitude = sharedPrefs.getString(
-                getString(R.string.settings_min_magnitude_key),
-                getString(R.string.settings_min_magnitude_default));
+        String language = sharedPrefs.getString(
+                getString(R.string.settings_language_key),
+                getString(R.string.settings_language_default));
 
-        // parse breaks apart the URI string that's passed into its parameter
+        String numOfArticles = sharedPrefs.getString(
+                getString(R.string.settings_num_of_articles_key),
+                getString(R.string.settings_num_of_articles_default));
+
+        String fieldOf = sharedPrefs.getString(
+                getString(R.string.settings_field_of_key),
+                getString(R.string.settings_field_of_default)
+        );
+
         Uri baseUri = Uri.parse(USGS_REQUEST_URL);
 
-        // buildUpon prepares the baseUri that we just parsed so we can add query parameters to it
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
-        // Append query parameter and its value. For example, the `format=geojson`
-        uriBuilder.appendQueryParameter("format", "geojson");
-        uriBuilder.appendQueryParameter("limit", "10");
-        uriBuilder.appendQueryParameter("minmag", minMagnitude);
-        uriBuilder.appendQueryParameter("orderby", "time");
 
-        // Return the completed uri `http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&limit=10&minmag=minMagnitude&orderby=time
-        return new EarthquakeLoader(this, uriBuilder.toString());
+        uriBuilder.appendQueryParameter("sources", fieldOf);
+        uriBuilder.appendQueryParameter("pageSize", numOfArticles);
+        uriBuilder.appendQueryParameter("sortBy", "publishedAt");
+        uriBuilder.appendQueryParameter("language", language);
+        uriBuilder.appendQueryParameter("apiKey", API_KEY);
+
+        return new NewsLoader(this, uriBuilder.toString());
 
     }
 
@@ -100,6 +125,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         }
     }
+
     @Override
     public void onLoaderReset(Loader<List<News>> loader) {
         Log.e("TEST", "Problem 4");

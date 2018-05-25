@@ -3,11 +3,25 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/settings_title">
 
+    <ListPreference
+        android:defaultValue="@string/settings_language_default"
+        android:entries="@array/settings_language_labels"
+        android:entryValues="@array/settings_language_values"
+        android:key="@string/settings_language_key"
+        android:title="@string/settings_language_label" />
+
+    <ListPreference
+        android:defaultValue="@string/settings_field_of_default"
+        android:entries="@array/settings_field_of_labels"
+        android:entryValues="@array/settings_field_of_values"
+        android:key="@string/settings_field_of_key"
+        android:title="@string/settings_field_of_label" />
+
     <EditTextPreference
-        android:defaultValue="@string/settings_min_magnitude_default"
+        android:defaultValue="@string/settings_num_of_articles_default"
         android:inputType="numberDecimal"
-        android:key="@string/settings_min_magnitude_key"
+        android:key="@string/settings_num_of_articles_key"
         android:selectAllOnFocus="true"
-        android:title="@string/settings_min_magnitude_label" />
+        android:title="@string/settings_num_of_articles_label" />
 
 </PreferenceScreen>
