@@ -2,25 +2,25 @@
 <resources>
 
     <string-array name="settings_field_of_labels">
-        <item>@string/settings_field_of_news_label</item>
-        <item>@string/settings_field_of_sport_label</item>
+        <item>@string/settings_oldest_label</item>
+        <item>@string/settings_newest_label</item>
     </string-array>
 
     <string-array name="settings_field_of_values">
-        <item>@string/settings_field_of_news_value</item>
-        <item>@string/settings_field_of_sport_value</item>
+        <item>@string/settings_oldest_value</item>
+        <item>@string/settings_newest_value</item>
     </string-array>
 
     <string-array name="settings_language_labels">
-        <item>@string/settings_language_en_label</item>
-        <item>@string/settings_language_de_label</item>
-        <item>@string/settings_language_fr_label</item>
+        <item>@string/settings_f1_label</item>
+        <item>@string/settings_football_label</item>
+        <item>@string/settings_mma_label</item>
     </string-array>
 
     <string-array name="settings_language_values">
-        <item>@string/settings_language_en_value</item>
-        <item>@string/settings_language_de_value</item>
-        <item>@string/settings_language_fr_value</item>
+        <item>@string/settings_f1_value</item>
+        <item>@string/settings_football_value</item>
+        <item>@string/settings_mma_value</item>
     </string-array>
 
 </resources>

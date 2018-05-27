@@ -114,28 +114,25 @@ public class NewsUtils {
         try {
 
             JSONObject baseJsonResponse = new JSONObject(newsJSON);
-
-            JSONArray newsArray = baseJsonResponse.getJSONArray("articles");
-
+            JSONObject responseJsonObject = baseJsonResponse.getJSONObject("response");
+            JSONArray newsArray = responseJsonObject.getJSONArray("results");
 
             for (int i = 0; i < newsArray.length(); i++) {
                 Log.i("TEST", "Problem" + i);
 
                 JSONObject currentNews = newsArray.getJSONObject(i);
-                String title = currentNews.getString("title");
-                String linformation = currentNews.getString("description");
-                String time = currentNews.getString("publishedAt");
-                String author = currentNews.getString("author");
-                String url = currentNews.getString("url");
+                String title = currentNews.getString("webTitle");
+                String time = currentNews.getString("webPublicationDate");
+                String url = currentNews.getString("webUrl");
 
-                News singleNews = new News(title, linformation, time, author, url);
+                News singleNews = new News(title, time, url);
 
                 news.add(singleNews);
             }
 
         } catch (JSONException e) {
 
-            Log.e("QueryUtils", "Problem parsing the singleNews JSON results", e);
+            Log.e("NewsUtils", "Problem parsing the singleNews JSON results", e);
         }
 
         return news;

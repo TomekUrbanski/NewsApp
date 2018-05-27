@@ -11,13 +11,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class NewsAdapter extends ArrayAdapter<News> {
     public NewsAdapter(@NonNull Context context, List<News> news) {
         super(context, 0, news);
     }
 
-    private static final String LOCATION_SEPARATOR = "T";
+    private static final String LOCATION_DATE_SEPARATOR = "T";
+    private static final String LOCATION_AUTHOR_SEPARATOR = (Pattern.quote("|"));
 
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -36,32 +38,30 @@ public class NewsAdapter extends ArrayAdapter<News> {
         }
 
         TextView newsTitle = listItemView.findViewById(R.id.titel);
-        newsTitle.setText(currentNews.getmTitle());
+        TextView newsAuthor = listItemView.findViewById(R.id.author);
+        String info = currentNews.getmTitle();
+
+
+        if (info.contains(LOCATION_AUTHOR_SEPARATOR)) {
+            String[] information = currentNews.getmTitle().split(LOCATION_AUTHOR_SEPARATOR);
+            newsTitle.setText(information[0]);
+            newsAuthor.setText(information[1]);
+        } else {
+            newsTitle.setText(currentNews.getmTitle());
+            newsAuthor.setText("Author: Unknown");
+        }
+
 
         TextView newsDate = listItemView.findViewById(R.id.date);
         String originalDate = currentNews.getDate();
 
-        if (originalDate.contains(LOCATION_SEPARATOR)) {
-            String[] parts = originalDate.split(LOCATION_SEPARATOR);
+        if (originalDate.contains(LOCATION_DATE_SEPARATOR)) {
+            String[] parts = originalDate.split(LOCATION_DATE_SEPARATOR);
             newsDate.setText(parts[0]);
 
         } else {
             newsDate.setText(currentNews.getDate());
         }
-
-
-        StringBuilder infoAndAuthor = new StringBuilder();
-        String author;
-        if (currentNews.getmAuthor() == null) {
-            author = "anonymous";
-        } else {
-            author = currentNews.getmAuthor();
-        }
-
-        infoAndAuthor.append(currentNews.getmInformation()).append(" /").append(author);
-        String finalInformation = infoAndAuthor.toString();
-        TextView newsInformation = listItemView.findViewById(R.id.information);
-        newsInformation.setText(finalInformation);
 
         return listItemView;
     }

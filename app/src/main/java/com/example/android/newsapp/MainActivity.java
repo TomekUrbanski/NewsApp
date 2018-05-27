@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,8 +22,8 @@ public class MainActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<List<News>>, SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static final String USGS_REQUEST_URL =
-            "https://newsapi.org/v2/everything";
-    private static final String API_KEY = "6047e7081995422b936befa9fa616a4f";
+            "https://content.guardianapis.com/search";
+    private static final String API_KEY = "683dadb5-5d5b-4a8e-8748-19519dca4684";
 
     private static final int NEWS_LOADER_ID = 1;
     private NewsAdapter mAdapter;
@@ -79,18 +78,17 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public Loader<List<News>> onCreateLoader(int i, Bundle bundle) {
-        Log.e("TEST", "Problem 1");
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         String language = sharedPrefs.getString(
-                getString(R.string.settings_language_key),
-                getString(R.string.settings_language_default));
+                getString(R.string.settings_topic_key),
+                getString(R.string.settings_topic_default));
 
         String numOfArticles = sharedPrefs.getString(
                 getString(R.string.settings_num_of_articles_key),
                 getString(R.string.settings_num_of_articles_default));
 
-        String fieldOf = sharedPrefs.getString(
+        String orderBy = sharedPrefs.getString(
                 getString(R.string.settings_field_of_key),
                 getString(R.string.settings_field_of_default)
         );
@@ -100,11 +98,13 @@ public class MainActivity extends AppCompatActivity
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
 
-        uriBuilder.appendQueryParameter("sources", fieldOf);
-        uriBuilder.appendQueryParameter("pageSize", numOfArticles);
-        uriBuilder.appendQueryParameter("sortBy", "publishedAt");
-        uriBuilder.appendQueryParameter("language", language);
-        uriBuilder.appendQueryParameter("apiKey", API_KEY);
+        uriBuilder.appendQueryParameter("q", language);
+        uriBuilder.appendQueryParameter("page-size", numOfArticles);
+//        uriBuilder.appendQueryParameter("format", "json");
+
+        uriBuilder.appendQueryParameter("order-by", orderBy);
+        uriBuilder.appendQueryParameter("api-key", API_KEY);
+
 
         return new NewsLoader(this, uriBuilder.toString());
 
@@ -113,14 +113,12 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onLoadFinished(Loader<List<News>> loader, List<News> news) {
-        Log.e("TEST", "Problem 2");
         View loadingIndicator = findViewById(R.id.loading_indicator);
         loadingIndicator.setVisibility(View.GONE);
 
         mEmptyStateTextView.setText(R.string.no_news);
 
         if (news != null && !news.isEmpty()) {
-            Log.e("TEST", "Problem 3");
             mAdapter.addAll(news);
 
         }
@@ -128,7 +126,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onLoaderReset(Loader<List<News>> loader) {
-        Log.e("TEST", "Problem 4");
         mAdapter.clear();
 
     }

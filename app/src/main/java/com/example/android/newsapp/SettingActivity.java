@@ -24,7 +24,7 @@ public class SettingActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.settings_main);
 
-            Preference language = findPreference(getString(R.string.settings_language_key));
+            Preference language = findPreference(getString(R.string.settings_topic_key));
             bindPreferenceSummaryToValue(language);
 
             Preference numOfArticles = findPreference(getString(R.string.settings_num_of_articles_key));

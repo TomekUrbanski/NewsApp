@@ -4,11 +4,11 @@
     android:title="@string/settings_title">
 
     <ListPreference
-        android:defaultValue="@string/settings_language_default"
+        android:defaultValue="@string/settings_topic_default"
         android:entries="@array/settings_language_labels"
         android:entryValues="@array/settings_language_values"
-        android:key="@string/settings_language_key"
-        android:title="@string/settings_language_label" />
+        android:key="@string/settings_topic_key"
+        android:title="@string/settings_topic_label" />
 
     <ListPreference
         android:defaultValue="@string/settings_field_of_default"
