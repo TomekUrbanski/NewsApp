@@ -117,14 +117,13 @@ public class NewsUtils {
             JSONObject responseJsonObject = baseJsonResponse.getJSONObject("response");
             JSONArray newsArray = responseJsonObject.getJSONArray("results");
             for (int i = 0; i < newsArray.length(); i++) {
-                Log.i("TEST", "Problem" + i);
 
                 JSONObject currentNews = newsArray.getJSONObject(i);
                 String title = currentNews.optString("webTitle");
                 String time = currentNews.optString("webPublicationDate");
                 String url = currentNews.optString("webUrl");
                 JSONArray tags = currentNews.getJSONArray("tags");
-                JSONObject tagObject = tags.getJSONObject(i);
+                JSONObject tagObject = tags.getJSONObject(0);
                 String author = tagObject.optString("webTitle");
 
                 News singleNews = new News(title, time, url, author);

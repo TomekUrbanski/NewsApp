@@ -41,7 +41,7 @@ public class NewsAdapter extends ArrayAdapter<News> {
         String info = currentNews.getmTitle();
 
 
-        if (info.contains(LOCATION_AUTHOR_SEPARATOR)) {
+        if (info.contains("|")) {
             String[] information = currentNews.getmTitle().split(LOCATION_AUTHOR_SEPARATOR);
             newsTitle.setText(information[0]);
         } else {

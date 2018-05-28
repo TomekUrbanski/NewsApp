@@ -97,13 +97,11 @@ public class MainActivity extends AppCompatActivity
 
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
-
-        uriBuilder.appendQueryParameter("q", language);
-        uriBuilder.appendQueryParameter("page-size", numOfArticles);
-        uriBuilder.appendQueryParameter("show-tags", "contributor");
         uriBuilder.appendQueryParameter("order-by", orderBy);
+        uriBuilder.appendQueryParameter("show-tags", "contributor");
+        uriBuilder.appendQueryParameter("page-size", numOfArticles);
+        uriBuilder.appendQueryParameter("q", language);
         uriBuilder.appendQueryParameter("api-key", API_KEY);
-
 
         return new NewsLoader(this, uriBuilder.toString());
 

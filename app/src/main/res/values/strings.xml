@@ -32,8 +32,9 @@
     <string name="settings_football_label">Football</string>
     <string name="settings_football_value" translatable="false">football</string>
 
-    <string name="settings_mma_label">MMA</string>
-    <string name="settings_mma_value" translatable="false">mma</string>
+    <string name="settings_basketball_label">Basketball</string>
+    <string name="settings_basketball_value" translatable="false">basketball</string>
+
     <string name="author_unknown">Author: Unknown</string>
 
 </resources>
