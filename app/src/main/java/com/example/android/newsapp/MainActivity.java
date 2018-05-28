@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
                 News currentNews = mAdapter.getItem(position);
-                Uri earthquakeUri = Uri.parse(currentNews.getmUrl());
-                Intent websiteIntent = new Intent(Intent.ACTION_VIEW, earthquakeUri);
+                Uri newsUri = Uri.parse(currentNews.getmUrl());
+                Intent websiteIntent = new Intent(Intent.ACTION_VIEW, newsUri);
                 startActivity(websiteIntent);
             }
         });
@@ -100,8 +100,7 @@ public class MainActivity extends AppCompatActivity
 
         uriBuilder.appendQueryParameter("q", language);
         uriBuilder.appendQueryParameter("page-size", numOfArticles);
-//        uriBuilder.appendQueryParameter("format", "json");
-
+        uriBuilder.appendQueryParameter("show-tags", "contributor");
         uriBuilder.appendQueryParameter("order-by", orderBy);
         uriBuilder.appendQueryParameter("api-key", API_KEY);
 

@@ -34,6 +34,7 @@
 
     <string name="settings_mma_label">MMA</string>
     <string name="settings_mma_value" translatable="false">mma</string>
+    <string name="author_unknown">Author: Unknown</string>
 
 </resources>
 

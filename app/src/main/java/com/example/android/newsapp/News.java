@@ -5,11 +5,13 @@ public class News {
     private String mTitle;
     private String mDate;
     private String mUrl;
+    private String mAuthor;
 
-    public News(String title, String date, String url) {
+    public News(String title, String date, String url, String author) {
         mTitle = title;
         mDate = date;
         mUrl = url;
+        mAuthor = author;
     }
 
     public String getmTitle() {
@@ -22,5 +24,9 @@ public class News {
 
     public String getmUrl() {
         return mUrl;
+    }
+
+    public String getmAuthor() {
+        return mAuthor;
     }
 }

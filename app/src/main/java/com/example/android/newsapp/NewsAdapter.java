@@ -19,7 +19,7 @@ public class NewsAdapter extends ArrayAdapter<News> {
     }
 
     private static final String LOCATION_DATE_SEPARATOR = "T";
-    private static final String LOCATION_AUTHOR_SEPARATOR = (Pattern.quote("|"));
+    private static final String LOCATION_AUTHOR_SEPARATOR = ("\\|");
 
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -38,17 +38,22 @@ public class NewsAdapter extends ArrayAdapter<News> {
         }
 
         TextView newsTitle = listItemView.findViewById(R.id.titel);
-        TextView newsAuthor = listItemView.findViewById(R.id.author);
         String info = currentNews.getmTitle();
 
 
         if (info.contains(LOCATION_AUTHOR_SEPARATOR)) {
             String[] information = currentNews.getmTitle().split(LOCATION_AUTHOR_SEPARATOR);
             newsTitle.setText(information[0]);
-            newsAuthor.setText(information[1]);
         } else {
             newsTitle.setText(currentNews.getmTitle());
-            newsAuthor.setText("Author: Unknown");
+
+        }
+
+        TextView newsAuthor = listItemView.findViewById(R.id.author);
+        if (currentNews.getmAuthor()!= null) {
+            newsAuthor.setText(currentNews.getmAuthor());
+        }else{
+            newsAuthor.setText(R.string.author_unknown);
         }
 
 
