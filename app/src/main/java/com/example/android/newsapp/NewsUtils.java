@@ -120,13 +120,18 @@ public class NewsUtils {
 
                 JSONObject currentNews = newsArray.getJSONObject(i);
                 String title = currentNews.optString("webTitle");
+                String section = currentNews.optString("sectionName");
                 String time = currentNews.optString("webPublicationDate");
                 String url = currentNews.optString("webUrl");
                 JSONArray tags = currentNews.getJSONArray("tags");
-                JSONObject tagObject = tags.getJSONObject(0);
-                String author = tagObject.optString("webTitle");
+                String author = "";
+                
+                if (tags.length() != 0) {
+                    JSONObject tagObject = tags.getJSONObject(0);
+                    author = tagObject.optString("webTitle");
+                }
 
-                News singleNews = new News(title, time, url, author);
+                News singleNews = new News(title, section, time, url, author);
 
                 news.add(singleNews);
             }

@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class NewsAdapter extends ArrayAdapter<News> {
     public NewsAdapter(@NonNull Context context, List<News> news) {
@@ -37,9 +36,11 @@ public class NewsAdapter extends ArrayAdapter<News> {
             listItem.setBackgroundColor(Color.parseColor("#E0E0E0"));
         }
 
+        TextView sectionName = listItemView.findViewById(R.id.section);
+        sectionName.setText(currentNews.getmSection());
+
         TextView newsTitle = listItemView.findViewById(R.id.titel);
         String info = currentNews.getmTitle();
-
 
         if (info.contains("|")) {
             String[] information = currentNews.getmTitle().split(LOCATION_AUTHOR_SEPARATOR);
@@ -50,9 +51,9 @@ public class NewsAdapter extends ArrayAdapter<News> {
         }
 
         TextView newsAuthor = listItemView.findViewById(R.id.author);
-        if (currentNews.getmAuthor()!= null) {
+        if (currentNews.getmAuthor() != null) {
             newsAuthor.setText(currentNews.getmAuthor());
-        }else{
+        } else {
             newsAuthor.setText(R.string.author_unknown);
         }
 
